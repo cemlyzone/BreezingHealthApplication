@@ -9,28 +9,28 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class CaloricPagerAdapter extends FragmentPagerAdapter {
 
-	public CaloricPagerAdapter(FragmentManager fm) {
-		super(fm);
-		// TODO Auto-generated constructor stub
-	}
+    public CaloricPagerAdapter(FragmentManager fm) {
+        super(fm);
+        // TODO Auto-generated constructor stub
+    }
 
-	@Override
-	public Fragment getItem(int arg0) {
-		// TODO Auto-generated method stub
-		switch(arg0) {
-		case 0:
-			return CaloricBurnFragment.newInstance();
-		case 1:
-			return CaloricIntakeFragment.newInstance();
-		}
-		return null;
-	}
+    @Override
+    public Fragment getItem(int arg0) {
+        // TODO Auto-generated method stub
+        switch(arg0) {
+        case 0:
+            return CaloricBurnFragment.newInstance();
+        case 1:
+            return CaloricIntakeFragment.newInstance();
+        }
+        return null;
+    }
 
-	@Override
-	public int getCount() {
-		// TODO Auto-generated method stub
-		return 2;
-	}
+    @Override
+    public int getCount() {
+        // TODO Auto-generated method stub
+        return 2;
+    }
 
 
 

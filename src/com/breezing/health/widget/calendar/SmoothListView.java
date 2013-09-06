@@ -11,40 +11,40 @@ import android.widget.ListView;
 
 // implement smoothScrollToPositionFromTop for pre-Honeycomb
 public class SmoothListView extends ListView {
-	
-	/**
+    
+    /**
      * Handles scrolling between positions within the list.
      */
-    private PositionScroller mPositionScroller;	        
+    private PositionScroller mPositionScroller;            
 
-	public SmoothListView(Context context) {
-		super(context);
-	}
-	
-	public SmoothListView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-	}
+    public SmoothListView(Context context) {
+        super(context);
+    }
+    
+    public SmoothListView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
-	@Override
+    @Override
     public boolean onTouchEvent(MotionEvent ev) {
-		if (mPositionScroller != null)
-			mPositionScroller.stop();
-		return super.onTouchEvent(ev);
-	}
-	
-	@Override
-	@TargetApi(11)
-	public void smoothScrollToPositionFromTop(int position, int offset) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			super.smoothScrollToPositionFromTop(position, offset); // has a bug
-		} else {
-			if (mPositionScroller == null)
-				mPositionScroller = new PositionScroller();
-			mPositionScroller.startWithOffset(position, offset);
-		}
-	}
-	
-	private class PositionScroller implements Runnable {
+        if (mPositionScroller != null)
+            mPositionScroller.stop();
+        return super.onTouchEvent(ev);
+    }
+    
+    @Override
+    @TargetApi(11)
+    public void smoothScrollToPositionFromTop(int position, int offset) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            super.smoothScrollToPositionFromTop(position, offset); // has a bug
+        } else {
+            if (mPositionScroller == null)
+                mPositionScroller = new PositionScroller();
+            mPositionScroller.startWithOffset(position, offset);
+        }
+    }
+    
+    private class PositionScroller implements Runnable {
         private static final int SCROLL_DURATION = 200;
 
         private static final int MOVE_DOWN_POS = 1;
@@ -65,11 +65,11 @@ public class SmoothListView extends ListView {
         }
         
 //        void start(final int position) {
-//        	start(position, SCROLL_DURATION);
+//            start(position, SCROLL_DURATION);
 //        }
 //        
 //        void start(final int position, int duration) {
-//        	stop();
+//            stop();
 //            final int firstPos = getFirstVisiblePosition();
 //            final int lastPos = getLastVisiblePosition();
 //            
@@ -121,10 +121,10 @@ public class SmoothListView extends ListView {
 
             int viewTravelCount;
             if (mTargetPos < firstPos) {
-            	mDirection = MOVE_UP_POS;
+                mDirection = MOVE_UP_POS;
                 viewTravelCount = firstPos - mTargetPos;
             } else if (mTargetPos > lastPos) {
-            	mDirection = MOVE_DOWN_POS;
+                mDirection = MOVE_DOWN_POS;
                 viewTravelCount = mTargetPos - lastPos;
             } else {
                 // On-screen, just scroll.
@@ -206,21 +206,21 @@ public class SmoothListView extends ListView {
             }
 
             case MOVE_OFFSET: {
-            	if (mDirection == MOVE_UP_POS) {
-            		if (mLastSeenPos == firstPos) {
-            			// No new views, let things keep going.
-        				post(this);
-            			return;
-            		}
-	                mLastSeenPos = firstPos;
-            	} else {
-            		if (mLastSeenPos == lastPos) {
-            			// No new views, let things keep going.
-        				post(this);
-            			return;
-            		}
-	                mLastSeenPos = lastPos;
-            	}
+                if (mDirection == MOVE_UP_POS) {
+                    if (mLastSeenPos == firstPos) {
+                        // No new views, let things keep going.
+                        post(this);
+                        return;
+                    }
+                    mLastSeenPos = firstPos;
+                } else {
+                    if (mLastSeenPos == lastPos) {
+                        // No new views, let things keep going.
+                        post(this);
+                        return;
+                    }
+                    mLastSeenPos = lastPos;
+                }
 
                 final int childCount = getChildCount();
                 final int position = mTargetPos;
@@ -240,20 +240,20 @@ public class SmoothListView extends ListView {
                     final int distance = (int) (-getHeight() * modifier);
                     final int duration = (int) (mScrollDuration * modifier);
                     
-                	// distance is sometimes not big enough to change mLastSeenPos. so check first view top.
-	                final View firstView = getChildAt(0);
-	                final int scrollBy = firstView.getTop() - 1; // -1 is important to go to next view
-	                
+                    // distance is sometimes not big enough to change mLastSeenPos. so check first view top.
+                    final View firstView = getChildAt(0);
+                    final int scrollBy = firstView.getTop() - 1; // -1 is important to go to next view
+                    
                     smoothScrollBy(Math.min(distance, scrollBy), duration);
                     post(this);
                 } else if (position > lastPos) {
                     final int distance = (int) (getHeight() * modifier);
                     final int duration = (int) (mScrollDuration * modifier);
                     
-                	// distance is sometimes not big enough to change mLastSeenPos. so check last view top.
-	                final View lastView = getChildAt(getChildCount() - 1);
-	                final int scrollBy = lastView.getHeight() - (listHeight - lastView.getTop()) + 1; // +1 is important to go to next view
-	                
+                    // distance is sometimes not big enough to change mLastSeenPos. so check last view top.
+                    final View lastView = getChildAt(getChildCount() - 1);
+                    final int scrollBy = lastView.getHeight() - (listHeight - lastView.getTop()) + 1; // +1 is important to go to next view
+                    
                     smoothScrollBy(Math.max(distance, scrollBy), duration);
                     post(this);
                 } else {

@@ -263,27 +263,27 @@ public class CalendarView extends FrameLayout {
         // easetheworld : set date text size
         mDateTextSize = attributesArray.getDimensionPixelSize(R.styleable.CalendarView_dateTextSize, DEFAULT_DATE_TEXT_SIZE);
        
-    	// easetheworld : set paints for year, month, day
+        // easetheworld : set paints for year, month, day
         mYearPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-		mYearPaint.setTextAlign(Paint.Align.CENTER);
-		mYearPaint.setColor(yearColor);
-		
+        mYearPaint.setTextAlign(Paint.Align.CENTER);
+        mYearPaint.setColor(yearColor);
+        
         mMonthPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mMonthPaint.setTextAlign(Align.CENTER);
-		mMonthPaint.setColor(monthColor);
-		
+        mMonthPaint.setColor(monthColor);
+        
         mWeekdayPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mWeekdayPaint.setTextAlign(Align.CENTER);
         mWeekdayPaint.setFakeBoldText(true);
         mWeekdayPaint.setStyle(Style.FILL);
         mWeekdayPaint.setTextSize(mDateTextSize);
-		mWeekdayPaint.setColor(weekdayColor);
-		
-		mSaturdayPaint = new Paint(mWeekdayPaint);
-		mSaturdayPaint.setColor(saturdayColor);
-		
-		mSundayPaint = new Paint(mWeekdayPaint);
-		mSundayPaint.setColor(sundayColor);
+        mWeekdayPaint.setColor(weekdayColor);
+        
+        mSaturdayPaint = new Paint(mWeekdayPaint);
+        mSaturdayPaint.setColor(saturdayColor);
+        
+        mSundayPaint = new Paint(mWeekdayPaint);
+        mSundayPaint.setColor(sundayColor);
         
         mWeekSeparatorLineColor = attributesArray.getColor(
                 R.styleable.CalendarView_weekSeparatorLineColor, 0);
@@ -654,24 +654,24 @@ public class CalendarView extends FrameLayout {
     }
     
     public void addDate(int value, boolean animate, boolean center) {
-    	add(Calendar.DATE, value, animate, center);
+        add(Calendar.DATE, value, animate, center);
     }
     
     public void addWeek(int value, boolean animate, boolean center) {
-    	add(Calendar.WEEK_OF_YEAR, value, animate, center);
+        add(Calendar.WEEK_OF_YEAR, value, animate, center);
     }
     
     public void addMonth(int value, boolean animate, boolean center) {
-    	add(Calendar.MONTH, value, animate, center);
+        add(Calendar.MONTH, value, animate, center);
     }
     
     public void addYear(int value, boolean animate, boolean center) {
-    	add(Calendar.YEAR, value, animate, center);
+        add(Calendar.YEAR, value, animate, center);
     }
     
     private void add(int field, int value, boolean animate, boolean center) {
-    	mTempDate.setTimeInMillis(mAdapter.mSelectedDate.getTimeInMillis());
-    	mTempDate.add(field, value);
+        mTempDate.setTimeInMillis(mAdapter.mSelectedDate.getTimeInMillis());
+        mTempDate.add(field, value);
         goTo(mTempDate, animate, true, center);
     }
 
@@ -795,16 +795,16 @@ public class CalendarView extends FrameLayout {
         mListView = new WeeksListView(getContext());
         mListView.setId(android.R.id.list);
         mContentView.addView(mListView, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-		
+        
         // Configure the listview
         mListView.setDivider(null);
         mListView.setItemsCanFocus(true);
         mListView.setVerticalScrollBarEnabled(false);
         
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) { // API 11
-	        // Make the scrolling behavior nicer
-	        mListView.setFriction(mFriction);
-	        mListView.setVelocityScale(mVelocityScale);
+            // Make the scrolling behavior nicer
+            mListView.setFriction(mFriction);
+            mListView.setVelocityScale(mVelocityScale);
         }
     }
 
@@ -874,17 +874,17 @@ public class CalendarView extends FrameLayout {
     
     private class AdjustScrollRunnable implements Runnable {
     
-	    /**
-	     * The duration of the adjustment upon a user scroll in milliseconds.
-	     */
-	    private static final int ADJUSTMENT_SCROLL_DURATION = 500;
-	
-	    /**
-	     * How long to wait after receiving an onScrollStateChanged notification
-	     * before acting on it.
-	     */
-	    private static final int SCROLL_CHANGE_DELAY = 40;
-	    
+        /**
+         * The duration of the adjustment upon a user scroll in milliseconds.
+         */
+        private static final int ADJUSTMENT_SCROLL_DURATION = 500;
+    
+        /**
+         * How long to wait after receiving an onScrollStateChanged notification
+         * before acting on it.
+         */
+        private static final int SCROLL_CHANGE_DELAY = 40;
+        
         public void execute() {
             removeCallbacks(this);
             postDelayed(this, SCROLL_CHANGE_DELAY);
@@ -893,11 +893,11 @@ public class CalendarView extends FrameLayout {
         public void run() {
             View child = mListView.getChildAt(0);
             if (child != null) {
-            	int top = child.getTop();
-            	int bottom = child.getBottom();
-            	if (top + bottom > 0)
+                int top = child.getTop();
+                int bottom = child.getBottom();
+                if (top + bottom > 0)
                     mListView.smoothScrollBy(top, ADJUSTMENT_SCROLL_DURATION);
-            	else
+                else
                     mListView.smoothScrollBy(bottom, ADJUSTMENT_SCROLL_DURATION);
             }
         }
@@ -1049,8 +1049,8 @@ public class CalendarView extends FrameLayout {
      * </p>
      */
     private class WeekView extends View {
-    	
-    	private final Rect mTempRect = new Rect();
+        
+        private final Rect mTempRect = new Rect();
 
         private final Paint mDrawPaint = new Paint();
         
@@ -1105,7 +1105,7 @@ public class CalendarView extends FrameLayout {
 
             // Sets up any standard paints that will be used
             initilaizePaints();
-			
+            
         }
 
         /**
@@ -1146,7 +1146,7 @@ public class CalendarView extends FrameLayout {
             mFirstDay = (Calendar) mTempDate.clone();
             mMonthOfFirstWeekDay = mTempDate.get(Calendar.MONTH);
             
-	        // easetheworld : draw year, month background
+            // easetheworld : draw year, month background
             mYearOfFirstWeekDay = mTempDate.get(Calendar.YEAR);
             mWeekOfFirstWeekDay = mTempDate.get(Calendar.WEEK_OF_MONTH);
             mMaxWeekOfFirstWeekDay = mTempDate.getActualMaximum(Calendar.WEEK_OF_MONTH);
@@ -1158,10 +1158,10 @@ public class CalendarView extends FrameLayout {
                 } else {
                     mDayNumbers[i] = Integer.toString(mTempDate.get(Calendar.DAY_OF_MONTH));
                 }
-		        // easetheworld : draw year, month background
+                // easetheworld : draw year, month background
                 if (i == mNumCells - 1) {
-		            mWeekOfLastWeekDay = mTempDate.get(Calendar.WEEK_OF_MONTH);
-		            mMaxWeekOfLastWeekDay = mTempDate.getActualMaximum(Calendar.WEEK_OF_MONTH);
+                    mWeekOfLastWeekDay = mTempDate.get(Calendar.WEEK_OF_MONTH);
+                    mMaxWeekOfLastWeekDay = mTempDate.getActualMaximum(Calendar.WEEK_OF_MONTH);
                 }
                 mTempDate.add(Calendar.DAY_OF_MONTH, 1);
             }
@@ -1216,26 +1216,26 @@ public class CalendarView extends FrameLayout {
 
         @Override
         protected void onDraw(Canvas canvas) {
-        	drawMonth(canvas);
-        	drawSelectedDateBackground(canvas);
-        	drawWeekNumbersAndDates(canvas);
-        	drawWeekSeparators(canvas);
+            drawMonth(canvas);
+            drawSelectedDateBackground(canvas);
+            drawWeekNumbersAndDates(canvas);
+            drawWeekSeparators(canvas);
         }
         
         // easetheworld : draw year, month background
         private static final int YEAR_MONTH_BACKGROUND_SPAN_ROW = 4;
         
         private void drawMonth(Canvas canvas) {
-        	// month of first day
-        	drawMultirowBackgroundText(canvas, Integer.toString(mMonthOfFirstWeekDay+1), mMonthPaint, mMaxWeekOfFirstWeekDay, YEAR_MONTH_BACKGROUND_SPAN_ROW, mWeekOfFirstWeekDay-1, getWidth() / 2);
-        	
-        	if (mMonthOfLastWeekDay == mMonthOfFirstWeekDay)
-        		return;
-        	
-        	// month of last day
-        	drawMultirowBackgroundText(canvas, Integer.toString(mMonthOfLastWeekDay+1), mMonthPaint, mMaxWeekOfLastWeekDay, YEAR_MONTH_BACKGROUND_SPAN_ROW, mWeekOfLastWeekDay-1, getWidth() / 2);
+            // month of first day
+            drawMultirowBackgroundText(canvas, Integer.toString(mMonthOfFirstWeekDay+1), mMonthPaint, mMaxWeekOfFirstWeekDay, YEAR_MONTH_BACKGROUND_SPAN_ROW, mWeekOfFirstWeekDay-1, getWidth() / 2);
+            
+            if (mMonthOfLastWeekDay == mMonthOfFirstWeekDay)
+                return;
+            
+            // month of last day
+            drawMultirowBackgroundText(canvas, Integer.toString(mMonthOfLastWeekDay+1), mMonthPaint, mMaxWeekOfLastWeekDay, YEAR_MONTH_BACKGROUND_SPAN_ROW, mWeekOfLastWeekDay-1, getWidth() / 2);
         }
-		
+        
         /**
          * draw text background which is laid across spanRows rows.
          * the background is drawn through drawRows rows.
@@ -1246,9 +1246,9 @@ public class CalendarView extends FrameLayout {
          * you can set x.
          */
         final private void drawMultirowBackgroundText(Canvas canvas, String text, Paint paint, int spanRows, int drawRows, int currentRow, float x) {
-        	float y = (spanRows - drawRows) * getHeight() / 2 + (drawRows - currentRow) * getHeight();
-        	paint.setTextSize(drawRows * getHeight());
-			canvas.drawText(text, x, y - paint.descent() / 2, paint);
+            float y = (spanRows - drawRows) * getHeight() / 2 + (drawRows - currentRow) * getHeight();
+            paint.setTextSize(drawRows * getHeight());
+            canvas.drawText(text, x, y - paint.descent() / 2, paint);
         }
 
         /**
@@ -1274,16 +1274,16 @@ public class CalendarView extends FrameLayout {
             int i0 = mFirstDayOfWeek - i;
             Paint dayPaint;
             for (; i < nDays; i++) {
-            	// easetheworld : Saturday, Sunday highlight
-            	int ii = i + i0;
-            	if (ii > Calendar.SATURDAY)
-            		ii -= DAYS_PER_WEEK;
-        		if (ii == Calendar.SATURDAY) // Saturday
-        			dayPaint = mSaturdayPaint;
-        		else if (ii == Calendar.SUNDAY) // Sunday
-        			dayPaint = mSundayPaint;
-        		else
-        			dayPaint = mWeekdayPaint;
+                // easetheworld : Saturday, Sunday highlight
+                int ii = i + i0;
+                if (ii > Calendar.SATURDAY)
+                    ii -= DAYS_PER_WEEK;
+                if (ii == Calendar.SATURDAY) // Saturday
+                    dayPaint = mSaturdayPaint;
+                else if (ii == Calendar.SUNDAY) // Sunday
+                    dayPaint = mSundayPaint;
+                else
+                    dayPaint = mWeekdayPaint;
                 int x = (2 * i + 1) * mWidth / divisor;
                 canvas.drawText(mDayNumbers[i], x, y, dayPaint);
             }
@@ -1347,66 +1347,66 @@ public class CalendarView extends FrameLayout {
     
     private class WeeksListView extends SmoothListView {
 
-		public WeeksListView(Context context) {
-			super(context);
-			setCacheColorHint(Color.TRANSPARENT);
-			setFastScrollEnabled(false);
-		}
+        public WeeksListView(Context context) {
+            super(context);
+            setCacheColorHint(Color.TRANSPARENT);
+            setFastScrollEnabled(false);
+        }
 
-		@Override
-		protected void onDraw(Canvas canvas) {
-			super.onDraw(canvas);
-			drawYearText(canvas);
-		}
-		
-		private void drawYearText(Canvas canvas) {
-			WeekView middleChild = (WeekView)getChildAt(getChildCount() / 2);
-			int year = middleChild.getYearOfFirstWeekDay();
-        	mYearPaint.setTextSize(middleChild.getHeight());
-			canvas.drawText(Integer.toString(year), getWidth() / 2, getHeight() / 2, mYearPaint);
-		}
-		
-		public void scrollToPosition(int position, boolean animate, boolean center) {
-			mCenterScrollRunnable.execute(position, animate, center);
-		}
-		
-		private CenterScrollRunnable mCenterScrollRunnable = new CenterScrollRunnable();
+        @Override
+        protected void onDraw(Canvas canvas) {
+            super.onDraw(canvas);
+            drawYearText(canvas);
+        }
+        
+        private void drawYearText(Canvas canvas) {
+            WeekView middleChild = (WeekView)getChildAt(getChildCount() / 2);
+            int year = middleChild.getYearOfFirstWeekDay();
+            mYearPaint.setTextSize(middleChild.getHeight());
+            canvas.drawText(Integer.toString(year), getWidth() / 2, getHeight() / 2, mYearPaint);
+        }
+        
+        public void scrollToPosition(int position, boolean animate, boolean center) {
+            mCenterScrollRunnable.execute(position, animate, center);
+        }
+        
+        private CenterScrollRunnable mCenterScrollRunnable = new CenterScrollRunnable();
     
-	    private class CenterScrollRunnable implements Runnable {
-	    	
-	    	private int position;
-	    	private boolean animate;
-	    	private boolean center;
-	    	
-	    	private void execute(int position, boolean animate, boolean center) {
-	    		removeCallbacks(this);
-	    		if (center) {
-	    			View firstChild = getChildAt(0);
-	    			if (firstChild != null && firstChild.getHeight() > 0) {
-	    				int offset = (getHeight() - firstChild.getHeight()) / 2;
-	    				if (animate) {
-	    					smoothScrollToPositionFromTop(position, offset);
-	    				} else {
-	    					setSelectionFromTop(position, offset);
-	    				}
-	    			} else { // child is not made yet. ex) called in constructor
-	    				this.position = position;
-	    				this.animate = animate;
-	    				this.center = center;
-	    				post(this);
-	    			}
-	    		} else if (position < getFirstVisiblePosition() || position > getLastVisiblePosition()) {
-	    			if (animate)
-	        			smoothScrollToPosition(position);
-	    			else
-	    				setSelection(position);
-	    		}
-	    	}
-	
-			@Override
-			public void run() {
-				execute(this.position, this.animate, this.center);
-			}
-	    }
-	}
+        private class CenterScrollRunnable implements Runnable {
+            
+            private int position;
+            private boolean animate;
+            private boolean center;
+            
+            private void execute(int position, boolean animate, boolean center) {
+                removeCallbacks(this);
+                if (center) {
+                    View firstChild = getChildAt(0);
+                    if (firstChild != null && firstChild.getHeight() > 0) {
+                        int offset = (getHeight() - firstChild.getHeight()) / 2;
+                        if (animate) {
+                            smoothScrollToPositionFromTop(position, offset);
+                        } else {
+                            setSelectionFromTop(position, offset);
+                        }
+                    } else { // child is not made yet. ex) called in constructor
+                        this.position = position;
+                        this.animate = animate;
+                        this.center = center;
+                        post(this);
+                    }
+                } else if (position < getFirstVisiblePosition() || position > getLastVisiblePosition()) {
+                    if (animate)
+                        smoothScrollToPosition(position);
+                    else
+                        setSelection(position);
+                }
+            }
+    
+            @Override
+            public void run() {
+                execute(this.position, this.animate, this.center);
+            }
+        }
+    }
 }
